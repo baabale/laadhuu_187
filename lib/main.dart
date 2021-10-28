@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() => runApp(LaadhuuApp());
 
-class LaadhuuApp extends StatelessWidget {
+class LaadhuuApp extends StatefulWidget {
   LaadhuuApp({Key? key}) : super(key: key);
 
+  @override
+  State<LaadhuuApp> createState() => _LaadhuuAppState();
+}
+
+class _LaadhuuAppState extends State<LaadhuuApp> {
   int diceOne = 1;
+
   int diceTwo = 3;
 
   @override
@@ -28,6 +35,10 @@ class LaadhuuApp extends StatelessWidget {
                 Expanded(
                   child: GestureDetector(
                       onTap: () {
+                        setState(() {
+                          diceOne = Random().nextInt(6) + 1;
+                        });
+
                         print('Dice $diceOne tapped');
                       },
                       // String Interpolation
@@ -37,7 +48,9 @@ class LaadhuuApp extends StatelessWidget {
                 Expanded(
                   child: InkWell(
                       onTap: () {
+                        diceTwo = Random().nextInt(6) + 1;
                         print('Dice $diceTwo Tapped');
+                        setState(() {});
                       },
                       child: Image.asset('images/dice$diceTwo.png')),
                 ),
